@@ -1,0 +1,76 @@
+version: '3'
+services:
+  eureka:
+    build: './api/spring-cloud-eureka-server'
+    ports:
+      - "8763:8763"
+    #volumes:
+      #- ./app/src:/app/src
+    #environment:
+      # If a production enviroment is desired, set the APP_ENV variable to production
+      # APP_ENV: 'production'
+      #APP_ENV: 'development'
+    #links:
+      #- api
+
+  zuul:
+    build: './api/spring-cloud-zuul-gateway-2'
+    ports:
+        - "8085:8085"
+    depends_on:
+        - "eureka"
+    # api host port defined the same as in the container
+    links: 
+      - "eureka"
+    #environment:
+      #MYSQL_ROOT_PASSWORD: 'root'
+    #ports:
+      #- "3001:3001"
+    #volumes:
+      #- "./api:/api" 
+    
+  db:
+    # This image exposes the standard MySQL port (3306)
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'admin'
+      MYSQL_DATABASE: 'CookBook'
+      MYSQL_USER: 'root' 
+      MYSQL_PASSWORD: 'root'
+    ports:
+      - "3333:3306"  
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links: 
+      - db
+    # phpmyadmin port defined to 3002
+    ports:
+      - "3302:3302"
+  
+  spring-user:
+    build: './api/UserManagementSystem'
+    depends_on:
+      - "eureka"
+      - "db"   
+    links: 
+      - "eureka"
+      - "db"  
+
+  spring-recipe:
+    build: './api/RecipeManagementSystem'
+    depends_on:
+      - "eureka"
+      - "db"   
+    links: 
+      - "eureka"
+      - "db"
+      
+  spring-ingredient:
+    build: './api/IngredientManagmentService'
+    depends_on:
+      - "eureka"
+      - "db"   
+    links: 
+      - "eureka"
+      - "db"    
