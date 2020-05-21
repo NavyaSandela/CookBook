@@ -1,8 +1,9 @@
 ## COOKBOOK- THE RECEPIE MANAGER
 
-Technologies used:  Spring Tool Suite.4  Tomcat Server (STS)  MySQL  HTML,CSS/SCSS,JavaScript,AJAX,BootStrap,JQuery  Hibernate  Version Control System: Git  Scrum Board: Trello  PostMan (Server Side Testing) Docker compose Eureka Zuul
+# Technologies used: 
+ Spring Tool Suite.4  Tomcat Server (STS)  MySQL  HTML,CSS/SCSS,JavaScript,AJAX,BootStrap,JQuery  Hibernate  Version Control System: Git  Scrum Board: Trello  PostMan (Server Side Testing) Docker compose Eureka Zuul
 
-Installation: 
+# Installation: 
 clone project using git https://github.com/NavyaSandela/CookBook
 
 Docker + React App + API Express + MySQL
